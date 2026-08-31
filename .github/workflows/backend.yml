@@ -31,3 +31,16 @@ jobs:
           file: ./docker/Dockerfile.backend
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/todo-app-backend:${{ github.sha }}
+
+      - name: SSH into server and deploy
+        run: |
+          run: |
+            echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
+            chmod 600 ~/ssh_key
+            ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@52.90.154.152 << 'EOF'
+            docker pull nishant0013thakur/todo-app-backend:${{ github.sha }}
+            docker stop backend1 || true
+            docker rm backend1 || true
+            docker run --name backend1 -d -p 3002:3002 nishant0013thakur/todo-app-backend:${{ github.sha }}
+          EOF
+             
