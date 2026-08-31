@@ -1,3 +1,5 @@
+
+
 name: Backend CI/CD
 
 on:
@@ -17,7 +19,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -29,4 +31,3 @@ jobs:
           file: ./docker/Dockerfile.backend
           push: true
           tags: nishant/todo-app-backend:${{ github.sha }}
-
