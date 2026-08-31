@@ -11,7 +11,7 @@ COPY ./turbo.json ./turbo.json
 Copy ./apps/ws ./apps/ws
 
 RUN bun install
-RUN bun run db:migrate
+RUN bun run db:generate
 
 EXPOSE 8080
 
