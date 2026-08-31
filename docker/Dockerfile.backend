@@ -10,8 +10,8 @@ COPY ./turbo.json ./turbo.json
 
 COPY ./apps/backend ./apps/backend
 
-RUN bun install
-RUN bun run db:generate
+RUN bun install --frozen-lockfile
+RUN cd packages/db && bunx prisma generate
 
 EXPOSE 3002
 
