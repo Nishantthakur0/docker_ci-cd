@@ -1,6 +1,6 @@
 
 
-name: Backend CI/CD
+name: websocket CI/CD
 
 on:
   push:
