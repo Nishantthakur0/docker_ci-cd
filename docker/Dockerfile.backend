@@ -11,6 +11,9 @@ COPY ./turbo.json ./turbo.json
 COPY ./apps/backend ./apps/backend
 
 RUN bun install --frozen-lockfile
+
+ARG DATABASE_URL="postgresql://postgres:mysecretpassword@localhost:5432/postgres"
+ENV DATABASE_URL=$DATABASE_URL
 RUN cd packages/db && bunx prisma generate
 
 EXPOSE 3002
