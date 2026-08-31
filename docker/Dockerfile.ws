@@ -8,10 +8,13 @@ COPY ./bun.lock ./bun.lock
 COPY ./package.json ./package.json
 COPY ./turbo.json ./turbo.json
 
-Copy ./apps/ws ./apps/ws
+COPY ./apps/ws ./apps/ws
 
-RUN bun install
-RUN bun run db:generate
+RUN bun install --frozen-lockfile
+
+ARG DATABASE_URL="postgresql://postgres:mysecretpassword@localhost:5432/postgres"
+ENV DATABASE_URL=$DATABASE_URL
+RUN cd packages/db && bunx prisma generate
 
 EXPOSE 8080
 
