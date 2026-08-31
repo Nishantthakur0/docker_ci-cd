@@ -30,4 +30,4 @@ jobs:
           context: .
           file: ./docker/Dockerfile.backend
           push: true
-          tags: nishant/todo-app-backend:${{ github.sha }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/todo-app-backend:${{ github.sha }}
