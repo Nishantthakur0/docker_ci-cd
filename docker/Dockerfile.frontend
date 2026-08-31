@@ -12,6 +12,7 @@ COPY ./apps/web ./apps/web
 
 RUN bun install --frozen-lockfile
 
+ARG DATABASE_URL="postgresql://postgres:mysecretpassword@localhost:5432/postgres"
 RUN DATABASE_URL=${DATABASE_URL} bun run build
 RUN cd packages/db && bunx prisma generate
 EXPOSE 3000
